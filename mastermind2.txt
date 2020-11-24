@@ -1,0 +1,94 @@
+
+@startuml
+
+
+Class MasterMind{
++void play()
++void quit()
+} 
+
+Class Game{
+- int attempts
+- Combination secretCombination
+- Combination requestCombination()
+}
+
+Class Combination{
+-generateRandom()
+-void displayResuts()
++evaluate(Combination combination)
+}
+
+enum Color {
+r
+b
+y
+g
+o
+p
+}
+
+
+MasterMind *-- Game
+Game "1" *-- "many" Combination
+Combination "1" *-- "4" Color
+
+
+
+@enduml
+@startuml
+
+
+Class MasterMind{
++void play()
++void quit()
+} 
+
+Class Board{
+- int attempts
+}
+
+Class Combination{
+int codeLength
+Color[] combination
+-void displayResuts()
++evaluate(Combination combination)
+}
+
+enum Color {
+r
+b
+y
+g
+o
+p
+}
+
+Class SecretCombination{
+-Color[] generateRandom()
+}
+
+Class ProposedCombination{}
+
+Class Player{
+ProposedCombination proposeCombination
+}
+
+Class MakerPlayer{}
+
+Class BrakerPlayer{}
+
+
+MasterMind *-- Board
+Board o-- "0-2" Player
+Combination "1" *-- "4" Color
+Combination <|-- SecretCombination
+Combination <|-- ProposedCombination
+Player <|-- MakerPlayer
+Player <|-- BrakerPlayer
+MakerPlayer o--> "1" SecretCombination
+BrakerPlayer ..> ProposedCombination
+
+
+
+@enduml
